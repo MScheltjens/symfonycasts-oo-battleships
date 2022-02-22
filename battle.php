@@ -1,7 +1,9 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+require __DIR__.'/bootstrap.php';
 
-$shipLoader = new ShipLoader();
+$container = new Container($configuration);
+
+$shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
 $ship1Id = isset($_POST['ship1_id']) ? $_POST['ship1_id'] : null;
@@ -13,6 +15,7 @@ if (!$ship1Id || !$ship2Id) {
     header('Location: /index.php?error=missing_data');
     die;
 }
+
 $ship1 = $shipLoader->findOneById($ship1Id);
 $ship2 = $shipLoader->findOneById($ship2Id);
 
@@ -21,12 +24,13 @@ if (!$ship1 || !$ship2) {
     die;
 }
 
+$battleManager = $container->getBattleManager();
+
 if ($ship1Quantity <= 0 || $ship2Quantity <= 0) {
     header('Location: /index.php?error=bad_quantities');
     die;
 }
 
-$battleManager = new BattleManager();
 $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity);
 ?>
 
@@ -85,7 +89,7 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                         <?php endif; ?>
                     <?php endif; ?>
                 </p>
-                <h3>Ship Health</h3>
+                <h3>Remaining Strength</h3>
                 <dl class="dl-horizontal">
                     <dt><?php echo $ship1->getName(); ?></dt>
                     <dd><?php echo $ship1->getStrength(); ?></dd>

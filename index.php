@@ -1,11 +1,9 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+require __DIR__.'/bootstrap.php';
 
-$shipLoader = new ShipLoader(
-        //this does not work if I extract it from the array in bootstrap.php ??????
-        'mysql:host=localhost;dbname=oo_battle', 'root', 'root'
-);
+$container = new Container($configuration);
 
+$shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
 $errorMessage = '';

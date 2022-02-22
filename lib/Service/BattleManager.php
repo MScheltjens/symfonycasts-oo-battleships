@@ -33,6 +33,8 @@ class BattleManager
             $ship1Health = $ship1Health - ($ship2->getWeaponPower() * $ship2Quantity);
             $ship2Health = $ship2Health - ($ship1->getWeaponPower() * $ship1Quantity);
         }
+
+        // update the strengths on the ships, so we can show this
         $ship1->setStrength($ship1Health);
         $ship2->setStrength($ship2Health);
 
@@ -50,12 +52,8 @@ class BattleManager
             $losingShip = $ship2;
             $usedJediPowers = $ship1UsedJediPowers;
         }
+
         return new BattleResult($usedJediPowers, $winningShip, $losingShip);
-        return array(
-            'winning_ship' => $winningShip,
-            'losing_ship' => $losingShip,
-            'used_jedi_powers' => $usedJediPowers,
-        );
     }
 
     private function didJediDestroyShipUsingTheForce(Ship $ship)
@@ -64,5 +62,4 @@ class BattleManager
 
         return mt_rand(1, 100) <= ($jediHeroProbability*100);
     }
-
 }
