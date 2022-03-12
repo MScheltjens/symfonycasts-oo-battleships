@@ -2,9 +2,11 @@
 require __DIR__.'/bootstrap.php';
 
 $container = new Container($configuration);
-
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
+$brokenShip = new BrokenShip('I am so broken');
+$ships[] = $brokenShip;
+
 
 
 
