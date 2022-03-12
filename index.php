@@ -6,6 +6,8 @@ $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
+
+
 $errorMessage = '';
 if (isset($_GET['error'])) {
     switch ($_GET['error']) {
@@ -64,10 +66,12 @@ if (isset($_GET['error'])) {
                         <th>Jedi Factor</th>
                         <th>Strength</th>
                         <th>Status</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($ships as $ship): ?>
+
                         <tr>
                             <td><?php echo $ship->getName(); ?></td>
                             <td><?php echo $ship->getWeaponPower(); ?></td>
@@ -80,6 +84,7 @@ if (isset($_GET['error'])) {
                                     <i class="fa fa-cloud"></i>
                                 <?php endif; ?>
                             </td>
+                            <td><?php echo $ship->getType() ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

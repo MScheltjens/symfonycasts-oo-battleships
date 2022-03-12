@@ -42,5 +42,3 @@ Pull up the new site by going to:
 
     http://localhost:8000
 
-
-
